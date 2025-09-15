@@ -38,7 +38,7 @@ DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
 SQL_ENGINE=django.db.backends.postgresql
 SQL_DATABASE=cashapi
 SQL_USER=cashapi_user
-SQL_PASSWORD=2oksiwt5
+SQL_PASSWORD=
 SQL_HOST=db
 SQL_PORT=5432
 ```
