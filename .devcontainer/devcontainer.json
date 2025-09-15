@@ -1,0 +1,17 @@
+{
+    "name": "cashapi",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "web",
+    "workspaceFolder": "/workspace",
+    // Para garantir que os containers subam e caiam juntos
+    "shutdownAction": "stopCompose",
+    // Instala dependências após criar o container
+    "postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt",
+    // Portas que vão ser expostas para fora do container
+    "forwardPorts": [
+        8001,
+        5432
+    ],
+    // Usuário padrão dentro do container
+    "remoteUser": "root"
+}

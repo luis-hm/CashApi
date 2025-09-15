@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    command: sleep infinity
+    volumes:
+      - ..:/workspace:cached
+    env_file:
+      - ../.env  # .env está na raiz do projeto
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+    networks:
+      - cashapi_network
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${SQL_DATABASE:-cashapi}
+      POSTGRES_USER: ${SQL_USER:-cashapi_user}
+      POSTGRES_PASSWORD: ${SQL_PASSWORD:-2oksiwt5}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    env_file:
+      - ../.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "54320:5432"  # Porta bem diferente para evitar conflitos
+    networks:
+      - cashapi_network
+
+volumes:
+  postgres_data:
+
+networks:
+  cashapi_network:
+    driver: bridge
